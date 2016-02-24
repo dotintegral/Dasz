@@ -1,0 +1,30 @@
+{
+  "name": "dasz",
+  "version": "0.1.0",
+  "description": "A cool dashboard system written with React and Express",
+  "main": "start.js",
+  "scripts": {
+    "start": "npm run serve | npm run dev",
+    "serve": "node server/server.js",
+    "dev": "webpack-dev-server --progress --colors --port 8090"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/AccidentallyMoose/Dasz.git"
+  },
+  "author": "AccidentallyMoose Team (http://github.com/AccidentallyMoose)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/AccidentallyMoose/Dasz/issues"
+  },
+  "dependencies": {
+    "express": "^4.13.4",
+    "react": "^0.14.7",
+    "react-dom": "^0.14.7"
+  },
+  "devDependencies": {
+    "jsx-loader": "^0.13.2",
+    "webpack": "^1.12.14",
+    "webpack-dev-server": "^1.14.1"
+  }
+}
