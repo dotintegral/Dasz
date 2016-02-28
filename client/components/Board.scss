@@ -1,0 +1,22 @@
+body {
+  margin: 0px;
+  padding: 0px;
+  background: #303030;
+}
+
+.board {
+  font-family: 'Source Sans Pro', serif;
+
+
+  h1 {
+    margin: 0px;
+    padding: 10px;
+    background: #5b5b5b;
+    color: white;
+    border-bottom: solid rgba(0, 0, 0, 0.15) 10px;
+  }
+
+  .widget {
+    margin: 20px;
+  }
+}
