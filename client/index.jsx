@@ -2,6 +2,8 @@
 
 var ReactDOM = require('react-dom')
 var React = require('react')
-var Hello = require('./components/Hello')
 
-ReactDOM.render(<Hello />, document.getElementById('content'))
+var name = config.scenes[0].components[0].name
+var Component = require('./components/' + name)
+
+ReactDOM.render(<Component />, document.getElementById('content'))
