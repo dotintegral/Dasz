@@ -2,7 +2,7 @@
   "url": "welcome",
   "name": "Welcome Board",
   "scenes": [{
-    "components": [{
+    "widgets": [{
       "name": "Hello"
     }]
   }]
