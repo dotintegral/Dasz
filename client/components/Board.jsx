@@ -8,13 +8,18 @@ const renderScenes = (scenes) => {
   return scenes.map( (sceneData) => (<Scene widgets={sceneData.widgets} />) )
 }
 
-const Board = ({name, scenes}) => {
-  return (
-    <div className="board">
-      <h1>{name}</h1>
-      {renderScenes(scenes)}
-    </div>
-  )
-}
+const Board =  React.createClass({
+  getInitialState: function () {
+    return this.props
+  },
+  render: function () {
+    return (
+      <div className="board">
+        <h1>{this.state.name}</h1>
+        {renderScenes(this.state.scenes)}
+      </div>
+    )
+  }
+})
 
 module.exports = Board
