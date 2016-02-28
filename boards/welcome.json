@@ -1,0 +1,9 @@
+{
+  "url": "welcome",
+  "name": "Welcome Board",
+  "scenes": [{
+    "components": [{
+      "name": "Hello"
+    }]
+  }]
+}
