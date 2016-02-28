@@ -4,7 +4,7 @@ var React = require('react')
 
 const renderWidgets = (widgets) => {
   return widgets.map((widgetData) => {
-    const Widget = require('./widgets/' + widgetData.name + '/' + widgetData.name)
+    const Widget = require('../widgets/' + widgetData.name + '/' + widgetData.name)
     return <Widget />
   })
 }
