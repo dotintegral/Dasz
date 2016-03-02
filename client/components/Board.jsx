@@ -3,12 +3,25 @@
 require('./Board.scss')
 var React = require('react')
 var Scene = require('./Scene')
+var io = require('socket.io-client')
+
+
+const connectWebSockets = (board) => {
+  var client = io('/', { query: `board=${board}` })
+  
+  client.on('update', function (data) {
+    console.log('received data', data)
+  })
+}
 
 const renderScenes = (scenes) => {
   return scenes.map( (sceneData) => (<Scene widgets={sceneData.widgets} />) )
 }
 
 const Board =  React.createClass({
+  componentDidMount: function () {
+    connectWebSockets(this.props.url)
+  },
   getInitialState: function () {
     return this.props
   },

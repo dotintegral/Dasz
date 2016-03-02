@@ -3,6 +3,8 @@ var app = express()
 var fs = require('fs')
 var path = require('path')
 var ejs = require('ejs')
+var http = require('http').Server(app);
+var io = require('socket.io')(http);
 
 var clientDir = path.join(__dirname, '..', 'client')
 
@@ -11,9 +13,10 @@ var boardsDir = path.join(__dirname, '..', 'boards')
 var boardConfigs = fs.readdirSync(boardsDir)
 
 boardConfigs.forEach((file) => {
-  boards.push( require(path.join(boardsDir, file)) )
+  var config = require(path.join(boardsDir, file))
+  config.url = file.replace(/\.json/, '')
+  boards.push(config)
 })
-
 
 boards.forEach((board) => {
   var templateFile = path.join(clientDir, 'index.ejs')
@@ -38,6 +41,15 @@ boards.forEach((board) => {
   fs.readFile(templateFile, 'utf-8', onRead)
 })
 
-app.listen(8080, function () {
+http.listen(8080, function () {
   console.log('Server is up and running')
 })
+
+io.on('connection', function(socket){
+  var board = socket.handshake.query.board
+
+  setInterval(function () {
+    var config = fs.readFileSync(path.join(boardsDir, board + '.json'), 'utf-8')
+    socket.emit('update', JSON.parse(config))
+  }, 5000)
+});
