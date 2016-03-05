@@ -6,26 +6,29 @@ var Scene = require('./Scene')
 var io = require('socket.io-client')
 
 
-const connectWebSockets = (board) => {
+const connectWebSockets = (board, onUpdate) => {
   var client = io('/', { query: `board=${board}` })
-
-  client.on('update', function (data) {
-    console.log('received data', data)
-  })
+  client.on('update', onUpdate)
 }
 
 const renderScenes = (scenes) => {
   return scenes.map( (sceneData) => (<Scene widgets={sceneData.widgets} />) )
 }
 
-const Board =  React.createClass({
-  componentDidMount: function () {
-    connectWebSockets(this.state.url)
-  },
-  getInitialState: function () {
-    return this.props.state
-  },
-  render: function () {
+class Board extends React.Component {
+
+  constructor({state}) {
+    this.state = state
+  }
+
+  componentDidMount() {
+    connectWebSockets(this.state.url, (data) => {
+      console.log('received data', data)
+      this.setState(JSON.parse(data))
+    })
+  }
+
+  render() {
     return (
       <div className="board">
         <h1>{this.state.name}</h1>
@@ -33,6 +36,6 @@ const Board =  React.createClass({
       </div>
     )
   }
-})
+}
 
 module.exports = Board
