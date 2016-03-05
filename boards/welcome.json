@@ -2,7 +2,10 @@
   "name": "Welcome Board",
   "scenes": [{
     "widgets": [{
-      "name": "Hello"
+      "name": "Hello",
+      "config": {
+        "background": "red"
+      }
     }]
   }]
 }
