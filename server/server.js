@@ -28,8 +28,8 @@ http.listen(8080, function () {
 io.on('connection', function(socket){
   var board = socket.handshake.query.board
 
-  setInterval(function () {
-    var config = fs.readFileSync(path.join(boardsDir, board + '.json'), 'utf-8')
-    socket.emit('update', JSON.parse(config))
-  }, 5000)
+  // setInterval(function () {
+  //   var config = fs.readFileSync(path.join(boardsDir, board + '.json'), 'utf-8')
+  //   socket.emit('update', JSON.parse(config))
+  // }, 5000)
 });

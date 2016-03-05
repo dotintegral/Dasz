@@ -5,10 +5,4 @@ var React = require('react')
 
 var Board = require('./components/Board')
 
-ReactDOM.render(
-  <Board
-    name={config.name}
-    url={config.url}
-    scenes={config.scenes}/>,
-  document.getElementById('content')
-)
+ReactDOM.render(<Board state={boardState}/>, document.getElementById('content')) 

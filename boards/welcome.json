@@ -1,11 +1,14 @@
 {
   "name": "Welcome Board",
   "scenes": [{
+    "config": {},
+    "visible": true,
     "widgets": [{
       "name": "Hello",
       "config": {
-        "background": "red"
-      }
+        "message": "I'm just a sample component. Please replace me with something more useful :-)"
+      },
+      "data": {}
     }]
   }]
 }

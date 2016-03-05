@@ -8,7 +8,7 @@ var io = require('socket.io-client')
 
 const connectWebSockets = (board) => {
   var client = io('/', { query: `board=${board}` })
-  
+
   client.on('update', function (data) {
     console.log('received data', data)
   })
@@ -23,7 +23,7 @@ const Board =  React.createClass({
     connectWebSockets(this.props.url)
   },
   getInitialState: function () {
-    return this.props
+    return this.props.state
   },
   render: function () {
     return (
