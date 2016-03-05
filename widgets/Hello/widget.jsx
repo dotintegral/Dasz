@@ -1,6 +1,6 @@
 'use strict'
 
-require('./Hello.scss')
+require('./style.scss')
 var React = require('react')
 
 const Hello = (props) => {
