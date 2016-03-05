@@ -8,7 +8,7 @@ const Hello = (props) => {
     <div className="hello widget">
       <div className="title">Hello!</div>
       <div className="contents">
-      
+        {props.data.message}
       </div>
     </div>
   )
