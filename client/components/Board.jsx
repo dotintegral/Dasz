@@ -12,7 +12,9 @@ const connectWebSockets = (board, onUpdate) => {
 }
 
 const renderScenes = (scenes) => {
-  return scenes.map( (sceneData) => (<Scene widgets={sceneData.widgets} />) )
+  return scenes.map( (sceneData, index) => (
+    <Scene key={index} widgets={sceneData.widgets} />
+  ))
 }
 
 class Board extends React.Component {
