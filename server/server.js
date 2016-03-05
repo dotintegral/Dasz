@@ -5,11 +5,11 @@ var path = require('path')
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 
+var stateHolder = require('./state_holder')
 var boardManager = require('./board_manager')(app)
 
-var clientDir = path.join(__dirname, '..', 'client')
-
 var boards = []
+var clientDir = path.join(__dirname, '..', 'client')
 var boardsDir = path.join(__dirname, '..', 'boards')
 var boardConfigs = fs.readdirSync(boardsDir)
 
@@ -26,10 +26,11 @@ http.listen(8080, function () {
 })
 
 io.on('connection', function(socket){
-  var board = socket.handshake.query.board
-
-  // setInterval(function () {
-  //   var config = fs.readFileSync(path.join(boardsDir, board + '.json'), 'utf-8')
-  //   socket.emit('update', JSON.parse(config))
-  // }, 5000)
+  var boardUrl = socket.handshake.query.board
+  boardManager.on('update', (board) => {
+    if (boardUrl === board) {
+      console.log('update ', board)
+      socket.emit('update', stateHolder.boardStateString(board))
+    }
+  })
 });

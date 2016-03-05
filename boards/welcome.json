@@ -2,7 +2,6 @@
   "name": "Welcome Board",
   "scenes": [{
     "config": {},
-    "visible": true,
     "widgets": [{
       "name": "Hello",
       "config": {

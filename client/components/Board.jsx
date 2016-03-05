@@ -20,7 +20,7 @@ const renderScenes = (scenes) => {
 
 const Board =  React.createClass({
   componentDidMount: function () {
-    connectWebSockets(this.props.url)
+    connectWebSockets(this.state.url)
   },
   getInitialState: function () {
     return this.props.state
