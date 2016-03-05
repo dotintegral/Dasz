@@ -4,7 +4,7 @@ var React = require('react')
 
 const renderWidgets = (widgets) => {
   return widgets.map((definition, index) => {
-    const Widget = require('../widgets/' + definition.name + '/' + definition.name)
+    const Widget = require('../../widgets/' + definition.name + '/' + definition.name)
     return <Widget key={index} data={definition.data}/>
   })
 }
