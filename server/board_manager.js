@@ -9,6 +9,10 @@ var eventEmitter = new events.EventEmitter()
 
 module.exports = function boardManager(app) {
 
+  function setupWorkers() {
+
+  }
+
   function createBoard(boardDefinition) {
     stateHolder.createBoardState(boardDefinition)
 

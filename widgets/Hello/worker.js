@@ -1,10 +1,17 @@
+var events = require('events')
 
-function onRequest(config) {
-  return Promise.resolve({
-    message: config.message
+var eventEmitter = new events.EventEmitter()
+
+setInterval(() => {
+
+  var status = !!(Math.random() * 2) ? 'success' : 'error'
+
+  eventEmitter.emit('update', {
+    status,
+    message: 'Well, hello!'
   })
-}
+}, 5000)
 
 module.exports = {
-  onRequest
+  on: eventEmitter.on.bind(eventEmitter)
 }
