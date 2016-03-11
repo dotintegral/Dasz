@@ -5,7 +5,7 @@
     "widgets": [{
       "name": "Hello",
       "config": {
-        "message": "I'm just a sample component. Please replace me with something more useful :-)"
+        "message": "Initial message :-)"
       },
       "data": {}
     }]

@@ -1,18 +1,32 @@
 var Immutable = require('immutable')
+var events = require('events')
 
 var boards = Immutable.Map({})
 
-function createBoardState(boardDefinition) {
-  boardDefinition.scenes.forEach((scene) => {
-    scene.widgets.forEach((widget) => {
-      widget.data = widget.config
-    })
-  })
+var eventEmitter = new events.EventEmitter()
+
+function setState(boardDefinition) {
   boards = boards.set(boardDefinition.url, Immutable.fromJS(boardDefinition))
 }
 
 function getBoardState(url) {
   return boards.get(url)
+}
+
+function update(boardUrl, widgetIds, data) {
+  console.log(boardUrl, widgetIds, data)
+
+  var board = boards.get(boardUrl)
+  board.get('scenes').forEach((scene) => {
+    scene.get('widgets').forEach((widget) => {
+      var id = widget.get('id')
+      if (widgetIds.indexOf(id) > -1) {
+        widget.set('data', data)
+      }
+    })
+  })
+
+  eventEmitter.emit('update', boardUrl)
 }
 
 function boardStateString(url) {
@@ -28,7 +42,9 @@ function boardStateString(url) {
 }
 
 module.exports ={
-  createBoardState,
+  on: eventEmitter.on.bind(eventEmitter),
+  setState,
+  update,
   getBoardState,
   boardStateString
 }

@@ -5,7 +5,7 @@
   "main": "start.js",
   "scripts": {
     "start": "npm run serve | npm run dev",
-    "serve": "nodemon --watch server/ --watch boards/ server/server.js",
+    "serve": "nodemon --watch server/ --watch boards/ --watch widgets/ server/server.js",
     "dev": "webpack-dev-server --progress --colors --port 8090"
   },
   "repository": {
