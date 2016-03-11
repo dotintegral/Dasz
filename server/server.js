@@ -29,7 +29,6 @@ io.on('connection', function(socket){
   var boardUrl = socket.handshake.query.board
   boardManager.on('update', (board) => {
     if (boardUrl === board) {
-      console.log('update ', board)
       socket.emit('update', stateHolder.boardStateString(board))
     }
   })

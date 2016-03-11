@@ -5,10 +5,11 @@ var ids = []
 
 setInterval(() => {
   var status = (Math.random() > 0.5) ? 'success' : 'error'
+  var message = (status === 'success') ? 'Wow! Such green!' : 'Oh noes, much errors!'
 
   eventEmitter.emit('update', ids, {
     status,
-    message: 'Well, hello!'
+    message
   })
 }, 5000)
 

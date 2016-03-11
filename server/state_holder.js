@@ -15,18 +15,22 @@ function getBoardState(url) {
 
 function update(boardUrl, widgetIds, data) {
   console.log(boardUrl, widgetIds, data)
+  var oldBoards = boards
 
   var board = boards.get(boardUrl)
-  board.get('scenes').forEach((scene) => {
-    scene.get('widgets').forEach((widget) => {
+  board.get('scenes').forEach((scene, sceneIndex) => {
+    scene.get('widgets').forEach((widget, widgetIndex) => {
       var id = widget.get('id')
       if (widgetIds.indexOf(id) > -1) {
-        widget.set('data', data)
+        var path = [boardUrl, 'scenes', sceneIndex, 'widgets', widgetIndex, 'data']
+        boards = boards.setIn(path, data)
       }
     })
   })
 
-  eventEmitter.emit('update', boardUrl)
+  if (oldBoards !== boards) {
+    eventEmitter.emit('update', boardUrl)
+  }
 }
 
 function boardStateString(url) {
@@ -41,7 +45,7 @@ function boardStateString(url) {
   return JSON.stringify(boardJSON)
 }
 
-module.exports ={
+module.exports = {
   on: eventEmitter.on.bind(eventEmitter),
   setState,
   update,

@@ -1,4 +1,11 @@
 .widget.hello {
-  background: #399D3D;
   color: white;
+
+  &.success {
+    background: #399D3D;
+  }
+
+  &.error {
+    background: #9d3939;
+  }
 }
