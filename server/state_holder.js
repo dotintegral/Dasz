@@ -14,7 +14,6 @@ function getBoardState(url) {
 }
 
 function update(boardUrl, widgetIds, data) {
-  console.log(boardUrl, widgetIds, data)
   var oldBoards = boards
 
   var board = boards.get(boardUrl)

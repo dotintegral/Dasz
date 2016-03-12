@@ -9,7 +9,7 @@ var stateHolder = require('./state_holder')
 var eventEmitter = new events.EventEmitter()
 var workers = {}
 
-var createWidgetId = (function () {
+var nextWidgetId = (function () {
   var id = 1
   return () => id++
 }())
@@ -43,7 +43,7 @@ module.exports = function boardManager(app) {
     var state = boardDefinition
     state.scenes.forEach((scene) => {
       scene.widgets.forEach((widget) => {
-        widget.id = createWidgetId()
+        widget.id = nextWidgetId()
         widget.data = getWidgetInitialState(boardDefinition.url, widget)
       })
     })
@@ -74,9 +74,7 @@ module.exports = function boardManager(app) {
           })
         )
       })
-
     }
-
 
     fs.readFile(templateFile, 'utf-8', onRead)
   }

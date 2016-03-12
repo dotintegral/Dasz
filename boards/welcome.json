@@ -3,7 +3,7 @@
   "scenes": [{
     "config": {},
     "widgets": [{
-      "name": "Hello",
+      "name": "hello",
       "config": {
         "message": "Initial message :-)"
       },
