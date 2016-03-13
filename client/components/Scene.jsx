@@ -11,7 +11,7 @@ const renderWidgets = (widgets) => {
 
 const Scene = ({widgets}) => {
   return (
-    <div>
+    <div className="scene">
       {renderWidgets(widgets)}
     </div>
   )

@@ -11,30 +11,57 @@ const connectWebSockets = (board, onUpdate) => {
   client.on('update', onUpdate)
 }
 
-const renderScenes = (scenes) => {
-  return scenes.map( (sceneData, index) => (
-    <Scene key={index} widgets={sceneData.widgets} />
-  ))
+const renderScenes = ({scenes, activeScene}) => {
+  let sceneData = scenes[activeScene]
+  return (<Scene key={activeScene} widgets={sceneData.widgets} />)
+}
+
+const renderTab = (name, active) => {
+  let className = 'tab ' + (active ? 'active' : '')
+  return (<div className={className}>{name}</div>)
+}
+
+const renderTopBar = (state) => {
+  return (
+    <div className="top-bar">
+      <h1>{state.name}</h1>
+      {state.scenes.map((scene, index) => {
+        return renderTab(scene.name, index === state.activeScene)
+      })}
+    </div>
+  )
+}
+
+const addUserState = (state, oldState) => {
+  if (oldState) {
+    state.activeScene = oldState.activeScene
+  } else {
+    state.activeScene = 0
+  }
+
+  return state
 }
 
 class Board extends React.Component {
 
   constructor({state}) {
+    state = addUserState(state)
     this.state = state
   }
 
   componentDidMount() {
     connectWebSockets(this.state.url, (data) => {
-      console.log('received data', data)
-      this.setState(JSON.parse(data))
+      let newState = addUserState(JSON.parse(data), this.state)
+      console.log('New State', newState)
+      this.setState(newState)
     })
   }
 
   render() {
     return (
       <div className="board">
-        <h1>{this.state.name}</h1>
-        {renderScenes(this.state.scenes)}
+        {renderTopBar(this.state)}
+        {renderScenes(this.state)}
       </div>
     )
   }

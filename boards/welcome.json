@@ -1,6 +1,23 @@
 {
   "name": "Welcome Board",
   "scenes": [{
+    "name": "Scene 1",
+    "config": {},
+    "widgets": [{
+      "name": "hello",
+      "config": {
+        "message": "Initial message :-)"
+      },
+      "data": {}
+    }, {
+      "name": "hello",
+      "config": {
+        "message": "Initial message :-)"
+      },
+      "data": {}
+    }]
+  }, {
+    "name": "Scene 2",
     "config": {},
     "widgets": [{
       "name": "hello",

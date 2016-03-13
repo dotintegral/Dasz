@@ -8,20 +8,39 @@ body {
   font-family: 'Source Sans Pro', serif;
 
 
-  h1 {
+  .top-bar {
     margin: 0px;
-    padding: 10px;
+    padding: 0px;
     background: #5b5b5b;
-    color: white;
     border-bottom: solid rgba(0, 0, 0, 0.15) 10px;
-  }
+    overflow: auto;
 
-  .widget {
-    margin: 20px;
+    h1 {
+      color: white;
+      float: left;
+      height: 40px;
+      margin: 10px 20px;
+    }
+
+    .tab {
+      color: rgba(255, 255, 255, 0.8);
+      float: left;
+      height: 40px;
+      line-height: 40px;
+      padding: 10px 20px;
+      font-size: 20px;
+
+      &.active {
+        background: rgba(0, 0, 0, 0.15);
+        font-size: 24px;
+      }
+    }
   }
 }
 
 .widget {
+  margin: 20px;
+  float: left;
   width: 200px;
   height: 200px;
   box-sizing: border-box;
