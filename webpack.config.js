@@ -5,8 +5,13 @@ module.exports = {
     },
     module: {
         loaders: [{
-            test: /\.jsx$/,
-            loader: 'jsx-loader?insertPragma=React.DOM&harmony'
+            test: /\.jsx?$/,
+            exclude: /node_modules/,
+            loader: 'babel-loader',
+            query: {
+              plugins: ['transform-object-assign'],
+              presets: ['react', 'es2015']
+            }
           }, {
             test: /\.scss$/,
             loader: 'style!css!sass'
