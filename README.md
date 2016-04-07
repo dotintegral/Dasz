@@ -31,7 +31,7 @@ Whenever a new widget instance is being created, `getInitialState` is being call
 
 Now, notice that you can have a multiple instances of widgets defined inside multiple board config files, but all of them will be connected to a single worker. So there is only one worker per widget type. One can spawn separate workers inside main `worker.js` file if needed. 
 
-#### `on`
+#### `on(eventName, callback(ids, state))`
 
 An implementation of event bus, identically to `events.EventEmitter.on`. In fact, it's prefered to use native Node's events.
 
@@ -44,3 +44,12 @@ The simplest implementation of that method would be
       on: eventEmitter.on.bind(eventEmitter),
       getInitialState: getInitialState
     }
+
+The only way that worker is allowed to communicate with widget instances is by triggering an `update` event. It must contain 2 arguments:
+
+* ids - array ids of widget that have to be upadated
+* state - an state object for given widgets to be in. This is the same state that received inside the `widget.jsx` as `props.data.status`. 
+
+Notice that multiple widget instances can be updated with a single state because of the array of ids.
+
+    eventEmitter.emit('update', [1, 2, 3], {what: 'my status object'})
