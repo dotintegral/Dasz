@@ -19,7 +19,7 @@ Dasz provides a efficent, one way communication between `worker.js` and `widget.
 
 ### Creating worker file
 
-Worker is that part of each widget that checks the state of given service. 
+Worker is that part of each widget that checks the state of given service.
 The required API of each worker consists of 2 methods:
 
 * on - methods for adding event listeners, usualy can be taken an Node's native `events.EventEmitter` instance
@@ -27,11 +27,11 @@ The required API of each worker consists of 2 methods:
 
 #### `getInitialState(widgetId, config)`
 
-Whenever a new widget instance is being created, `getInitialState` is being called. It should return an initial state for the newly created instance. Since the method is synchronus, it should not perform any actions that might take some time (like checking if your service is available). It should just register the component with it's configuration and return an initial state (like a 'widget loading...' message). 
+Whenever a new widget instance is being created, `getInitialState` is being called. It should return an initial state for the newly created instance. Since the method is synchronus, it should not perform any actions that might take some time (like checking if your service is available). It should just register the component with it's configuration and return an initial state (like a 'widget loading...' message).
 
-Now, notice that you can have a multiple instances of widgets defined inside multiple board config files, but all of them will be connected to a single worker. So there is only one worker per widget type. One can spawn separate workers inside main `worker.js` file if needed. 
+Now, notice that you can have a multiple instances of widgets defined inside multiple board config files, but all of them will be connected to a single worker. So there is only one worker per widget type. One can spawn separate workers inside main `worker.js` file if needed.
 
-#### `on(eventName, callback(ids, state))`
+#### `on(eventName, callback(ids, data))`
 
 An implementation of event bus, identically to `events.EventEmitter.on`. In fact, it's prefered to use native Node's events.
 
@@ -39,7 +39,7 @@ The simplest implementation of that method would be
 
     var events = require('events')
     var eventEmitter = new events.EventEmitter()
-    
+
     module.exports = {
       on: eventEmitter.on.bind(eventEmitter),
       getInitialState: getInitialState
@@ -48,8 +48,8 @@ The simplest implementation of that method would be
 The only way that worker is allowed to communicate with widget instances is by triggering an `update` event. It must contain 2 arguments:
 
 * ids - array ids of widget that have to be upadated
-* state - an state object for given widgets to be in. This is the same state that received inside the `widget.jsx` as `props.data.status`. 
+* data - an state object for given widgets to be in. This is the same data that received inside the `widget.jsx` as `props.data`.
 
-Notice that multiple widget instances can be updated with a single state because of the array of ids.
+Notice that multiple widget instances can be updated with a single data because of the array of ids.
 
-    eventEmitter.emit('update', [1, 2, 3], {what: 'my status object'})
+    eventEmitter.emit('update', [1, 2, 3], {what: 'my data'})
