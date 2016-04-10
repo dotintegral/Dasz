@@ -66,7 +66,6 @@ class Board extends React.Component {
 
     connectWebSockets(this.state.url, (data) => {
       let newState = addUserState(JSON.parse(data), this.state)
-      console.log('New State', newState)
 
       store.dispatch({
         type: 'UPDATE_STATE',

@@ -34,6 +34,10 @@ body {
         background: rgba(0, 0, 0, 0.15);
         font-size: 24px;
       }
+
+      &:hover {
+        cursor: pointer;
+      }
     }
   }
 }

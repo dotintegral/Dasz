@@ -4,7 +4,7 @@
   "description": "A cool dashboard system written with React and Express",
   "main": "start.js",
   "scripts": {
-    "start": "npm run serve | npm run dev",
+    "start": "npm run server | npm run dev",
     "server": "nodemon --watch server/ --watch boards/ --watch widgets/ server/server.js",
     "dev": "webpack-dev-server --progress --colors --port 8090"
   },
