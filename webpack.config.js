@@ -9,16 +9,22 @@ module.exports = {
             exclude: /node_modules/,
             loader: 'babel-loader',
             query: {
-              plugins: ['transform-object-assign'],
+              plugins: ['add-module-exports', 'transform-object-assign'],
               presets: ['react', 'es2015']
             }
           }, {
-            test: /\.scss$/,
-            loader: 'style!css!sass'
+            test: /\.s?css$/,
+            use: [{
+              loader: 'style-loader'
+            }, {
+              loader: 'css-loader'
+            }, {
+              loader: 'sass-loader'
+            }]
           }
         ]
     },
     resolve: {
-        extensions: ['', '.js', '.jsx']
+        extensions: ['.*', '.js', '.jsx']
     }
 }
