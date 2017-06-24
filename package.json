@@ -10,12 +10,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/AccidentallyMoose/Dasz.git"
+    "url": "https://github.com/dotintegral/Dasz.git"
   },
-  "author": "AccidentallyMoose Team (http://github.com/AccidentallyMoose)",
+  "author": "Artur Siery (http://github.com/dotintegral)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/AccidentallyMoose/Dasz/issues"
+    "url": "https://github.com/dotintegral/Dasz/issues"
   },
   "dependencies": {
     "css-loader": "^0.28.4",
