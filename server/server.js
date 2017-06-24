@@ -1,19 +1,19 @@
-var express = require('express')
-var app = express()
-var fs = require('fs')
-var path = require('path')
-var http = require('http').Server(app)
-var io = require('socket.io')(http)
+const express = require('express')
+const app = express()
+const fs = require('fs')
+const path = require('path')
+const http = require('http').Server(app)
+const io = require('socket.io')(http)
 
-var stateHolder = require('./state_holder')
-var boardManager = require('./board_manager')(app)
+const stateHolder = require('./state_holder')
+const boardManager = require('./board_manager')(app)
 
-var boards = []
-var boardsDir = path.join(__dirname, '..', 'boards')
-var boardConfigs = fs.readdirSync(boardsDir)
+const boards = []
+const boardsDir = path.join(__dirname, '..', 'boards')
+const boardConfigs = fs.readdirSync(boardsDir)
 
 boardConfigs.forEach((file) => {
-  var config = require(path.join(boardsDir, file))
+  const config = require(path.join(boardsDir, file))
   config.url = file.replace(/\.json/, '')
   boards.push(config)
 })
@@ -25,7 +25,7 @@ http.listen(8080, function () {
 })
 
 io.on('connection', function (socket) {
-  var boardUrl = socket.handshake.query.board
+  const boardUrl = socket.handshake.query.board
   boardManager.on('update', (board) => {
     if (boardUrl === board) {
       socket.emit('update', stateHolder.boardStateString(board))

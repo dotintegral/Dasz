@@ -1,16 +1,16 @@
-var path = require('path')
-var ejs = require('ejs')
-var fs = require('fs')
-var events = require('events')
+const path = require('path')
+const ejs = require('ejs')
+const fs = require('fs')
+const events = require('events')
 
-var clientDir = path.join(__dirname, '..', 'client')
-var widgetDir = path.join(__dirname, '..', 'widgets')
-var stateHolder = require('./state_holder')
-var eventEmitter = new events.EventEmitter()
-var workers = {}
+const clientDir = path.join(__dirname, '..', 'client')
+const widgetDir = path.join(__dirname, '..', 'widgets')
+const stateHolder = require('./state_holder')
+const eventEmitter = new events.EventEmitter()
+const workers = {}
 
-var nextWidgetId = (function () {
-  var id = 1
+const nextWidgetId = (function () {
+  let id = 1
   return () => id++
 }())
 
@@ -20,10 +20,10 @@ stateHolder.on('update', (url) => {
 
 module.exports = function boardManager (app) {
   function getWidgetInitialState (url, widget) {
-    var worker
-    var name = widget.name
-    var config = widget.config
-    var id = widget.id
+    let worker
+    const name = widget.name
+    const config = widget.config
+    const id = widget.id
 
     if (!workers[name]) {
       worker = require(path.join(widgetDir, name, 'worker'))
@@ -38,7 +38,7 @@ module.exports = function boardManager (app) {
   }
 
   function getBoardInitialState (boardDefinition) {
-    var state = boardDefinition
+    const state = boardDefinition
     state.scenes.forEach((scene) => {
       scene.widgets.forEach((widget) => {
         widget.id = nextWidgetId()
@@ -50,18 +50,18 @@ module.exports = function boardManager (app) {
   }
 
   function createBoard (boardDefinition) {
-    var initialState = getBoardInitialState(boardDefinition)
+    const initialState = getBoardInitialState(boardDefinition)
 
     stateHolder.setState(initialState)
 
-    var url = boardDefinition.url
-    var templateFile = path.join(clientDir, 'index.ejs')
-    var onRead = (err, rawTemplate) => {
+    const url = boardDefinition.url
+    const templateFile = path.join(clientDir, 'index.ejs')
+    const onRead = (err, rawTemplate) => {
       if (err) {
         return console.error('Cannot read the index.ejs file!')
       }
 
-      var render = ejs.compile(rawTemplate)
+      const render = ejs.compile(rawTemplate)
 
       app.use('/' + url, (req, res) => {
         res.send(

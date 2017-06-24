@@ -1,11 +1,11 @@
-var events = require('events')
+const events = require('events')
 
-var eventEmitter = new events.EventEmitter()
-var ids = []
+const eventEmitter = new events.EventEmitter()
+const ids = []
 
 setInterval(() => {
-  var status = (Math.random() > 0.5) ? 'success' : 'error'
-  var message = (status === 'success') ? 'Wow! Such green!' : 'Oh noes, much errors!'
+  const status = (Math.random() > 0.5) ? 'success' : 'error'
+  const message = (status === 'success') ? 'Wow! Such green!' : 'Oh noes, much errors!'
 
   eventEmitter.emit('update', ids, {
     status,
@@ -13,7 +13,7 @@ setInterval(() => {
   })
 }, 5000)
 
-var getInitialState = (widgetId, config) => {
+const getInitialState = (widgetId, config) => {
   ids.push(widgetId)
 
   return {
