@@ -40,6 +40,7 @@
     "babel-preset-react": "^6.5.0",
     "jsx-loader": "^0.13.2",
     "nodemon": "^1.11.0",
+    "standard": "^10.0.2",
     "webpack": "^3.0.0",
     "webpack-dev-server": "^2.5.0"
   }

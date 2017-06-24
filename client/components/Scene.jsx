@@ -5,13 +5,13 @@ var React = require('react')
 const renderWidgets = (widgets) => {
   return widgets.map((definition, index) => {
     const Widget = require('../../widgets/' + definition.name + '/widget')
-    return <Widget key={index} data={definition.data}/>
+    return <Widget key={index} data={definition.data} />
   })
 }
 
 const Scene = ({widgets}) => {
   return (
-    <div className="scene">
+    <div className='scene'>
       {renderWidgets(widgets)}
     </div>
   )

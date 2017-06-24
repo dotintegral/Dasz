@@ -5,15 +5,15 @@ var boards = Immutable.Map({})
 
 var eventEmitter = new events.EventEmitter()
 
-function setState(boardDefinition) {
+function setState (boardDefinition) {
   boards = boards.set(boardDefinition.url, Immutable.fromJS(boardDefinition))
 }
 
-function getBoardState(url) {
+function getBoardState (url) {
   return boards.get(url)
 }
 
-function update(boardUrl, widgetIds, data) {
+function update (boardUrl, widgetIds, data) {
   var oldBoards = boards
 
   var board = boards.get(boardUrl)
@@ -32,7 +32,7 @@ function update(boardUrl, widgetIds, data) {
   }
 }
 
-function boardStateString(url) {
+function boardStateString (url) {
   var boardJSON = boards.get(url).toJSON()
 
   boardJSON.scenes.forEach((scene) => {

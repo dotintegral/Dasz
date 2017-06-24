@@ -14,14 +14,12 @@ var nextWidgetId = (function () {
   return () => id++
 }())
 
-
 stateHolder.on('update', (url) => {
   eventEmitter.emit('update', url)
 })
 
-module.exports = function boardManager(app) {
-
-  function getWidgetInitialState(url, widget) {
+module.exports = function boardManager (app) {
+  function getWidgetInitialState (url, widget) {
     var worker
     var name = widget.name
     var config = widget.config
@@ -39,7 +37,7 @@ module.exports = function boardManager(app) {
     return worker.getInitialState(id, config)
   }
 
-  function getBoardInitialState(boardDefinition) {
+  function getBoardInitialState (boardDefinition) {
     var state = boardDefinition
     state.scenes.forEach((scene) => {
       scene.widgets.forEach((widget) => {
@@ -51,12 +49,12 @@ module.exports = function boardManager(app) {
     return state
   }
 
-  function createBoard(boardDefinition) {
+  function createBoard (boardDefinition) {
     var initialState = getBoardInitialState(boardDefinition)
 
     stateHolder.setState(initialState)
 
-    var url = boardDefinition.url;
+    var url = boardDefinition.url
     var templateFile = path.join(clientDir, 'index.ejs')
     var onRead = (err, rawTemplate) => {
       if (err) {

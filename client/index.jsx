@@ -5,4 +5,4 @@ var React = require('react')
 
 var Board = require('./components/Board')
 
-ReactDOM.render(<Board state={boardState}/>, document.getElementById('content')) 
+ReactDOM.render(<Board state={window.boardState} />, document.getElementById('content'))

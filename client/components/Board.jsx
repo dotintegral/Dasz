@@ -6,7 +6,6 @@ let Scene = require('./Scene')
 let io = require('socket.io-client')
 let store = require('../store')
 
-
 const connectWebSockets = (board, onUpdate) => {
   let client = io('/', { query: `board=${board}` })
   client.on('update', onUpdate)
@@ -32,7 +31,7 @@ const renderTab = (name, active, index) => {
 
 const renderTopBar = (state) => {
   return (
-    <div className="top-bar">
+    <div className='top-bar'>
       <h1>{state.name}</h1>
       {state.scenes.map((scene, index) => {
         return renderTab(scene.name, index === state.activeScene, index)
@@ -52,14 +51,13 @@ const addUserState = (state, oldState) => {
 }
 
 class Board extends React.Component {
-
-  constructor({state}) {
+  constructor ({state}) {
     super(...arguments)
     state = addUserState(state)
     this.state = state
   }
 
-  componentDidMount() {
+  componentDidMount () {
     store.subscribe(() => {
       this.setState(store.getState())
     })
@@ -74,9 +72,9 @@ class Board extends React.Component {
     })
   }
 
-  render() {
+  render () {
     return (
-      <div className="board">
+      <div className='board'>
         {renderTopBar(this.state)}
         {renderScenes(this.state)}
       </div>
