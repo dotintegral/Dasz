@@ -1,6 +1,4 @@
 const path = require('path')
-const ejs = require('ejs')
-const fs = require('fs')
 const events = require('events')
 
 const clientDir = path.join(__dirname, '..', 'client')
@@ -55,26 +53,17 @@ module.exports = function boardManager (app) {
     stateHolder.setState(initialState)
 
     const url = boardDefinition.url
-    const templateFile = path.join(clientDir, 'index.ejs')
-    const onRead = (err, rawTemplate) => {
-      if (err) {
-        return console.error('Cannot read the index.ejs file!')
-      }
+    const renderTemplate = require(path.join(clientDir, 'index.template.js'))
 
-      const render = ejs.compile(rawTemplate)
-
-      app.use('/' + url, (req, res) => {
-        res.send(
-          render({
-            name: stateHolder.getBoardState(url).get('name'),
-            url: url,
-            boardState: stateHolder.boardStateString(url)
-          })
-        )
-      })
-    }
-
-    fs.readFile(templateFile, 'utf-8', onRead)
+    app.use('/' + url, (req, res) => {
+      res.send(
+        renderTemplate({
+          name: stateHolder.getBoardState(url).get('name'),
+          url: url,
+          boardState: stateHolder.boardStateString(url)
+        })
+      )
+    })
   }
 
   return {

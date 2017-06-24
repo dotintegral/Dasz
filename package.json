@@ -19,7 +19,6 @@
   },
   "dependencies": {
     "css-loader": "^0.28.4",
-    "ejs": "^2.4.1",
     "express": "^4.13.4",
     "immutable": "^3.7.6",
     "node-sass": "^4.5.3",
