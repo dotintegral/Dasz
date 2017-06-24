@@ -21,6 +21,7 @@
     "css-loader": "^0.28.4",
     "express": "^4.13.4",
     "immutable": "^3.7.6",
+    "node-http-ping": "^0.2.2",
     "node-sass": "^4.5.3",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",

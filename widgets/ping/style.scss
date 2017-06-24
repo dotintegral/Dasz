@@ -1,0 +1,15 @@
+.widget.ping {
+  color: white;
+
+  &.fast {
+    background: #399D3D;
+  }
+
+  &.medium {
+    background: #ccaf0d;
+  }
+
+  &.slow {
+    background: #9d3939;
+  }
+}
