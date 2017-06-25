@@ -1,11 +1,19 @@
-'use strict'
-
-var React = require('react')
+const React = require('react')
 
 const renderWidgets = (widgets) => {
-  return widgets.map((definition, index) => {
-    const Widget = require('../../widgets/' + definition.name + '/widget')
-    return <Widget key={index} data={definition.data} />
+  return widgets.map(({name, data}, index) => {
+    let Widget
+
+    try {
+      Widget = require('../../widgets/' + name + '/widget')
+    } catch (e) {
+      try {
+        Widget = require('../../node_modules/dasz-widget-' + name + '/dist/widget')
+      } catch (e) {
+        throw new Error(`Cannot load widget named ${name}`)
+      }
+    }
+    return <Widget key={index} data={data} />
   })
 }
 

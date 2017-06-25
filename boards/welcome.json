@@ -4,6 +4,12 @@
     "name": "Scene 1",
     "config": {},
     "widgets": [{
+      "name": "hello",
+      "config": {
+        "message": "Hi!"
+      },
+      "data": {}
+    }, {
       "name": "ping",
       "config": {
         "name": "google",
@@ -12,20 +18,17 @@
         "refresh": 3000
       },
       "data": {}
-    }, {
-      "name": "hello",
-      "config": {
-        "message": "Initial message :-)"
-      },
-      "data": {}
     }]
   }, {
     "name": "Scene 2",
     "config": {},
     "widgets": [{
-      "name": "hello",
+      "name": "ping",
       "config": {
-        "message": "Initial message :-)"
+        "name": "google",
+        "url": "google.com",
+        "port": 80,
+        "refresh": 3000
       },
       "data": {}
     }]

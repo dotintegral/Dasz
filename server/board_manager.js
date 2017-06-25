@@ -2,7 +2,8 @@ const path = require('path')
 const events = require('events')
 
 const clientDir = path.join(__dirname, '..', 'client')
-const widgetDir = path.join(__dirname, '..', 'widgets')
+const nodeModulesDir = path.join(__dirname, '..', 'node_modules')
+const widgetsDir = path.join(__dirname, '..', 'widgets')
 const stateHolder = require('./state_holder')
 const eventEmitter = new events.EventEmitter()
 const workers = {}
@@ -16,6 +17,22 @@ stateHolder.on('update', (url) => {
   eventEmitter.emit('update', url)
 })
 
+function loadWorker (name) {
+  let worker
+
+  try {
+    worker = require(path.join(widgetsDir, name, 'worker'))
+  } catch (e) {
+    try {
+      worker = require(path.join(nodeModulesDir, 'dasz-widget-' + name, 'dist', 'worker'))
+    } catch (e) {
+      throw new Error(`Cannot find worker for widget named ${name}`)
+    }
+  }
+
+  return worker
+}
+
 module.exports = function boardManager (app) {
   function getWidgetInitialState (url, widget) {
     let worker
@@ -24,7 +41,7 @@ module.exports = function boardManager (app) {
     const id = widget.id
 
     if (!workers[name]) {
-      worker = require(path.join(widgetDir, name, 'worker'))
+      worker = loadWorker(name)
       worker.on('update', (ids, state) => {
         stateHolder.update(url, ids, state)
       })
