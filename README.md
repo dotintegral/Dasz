@@ -4,7 +4,7 @@ Dasz is a dashboard application for monitoring various services that are used on
 It aim is to provide easy to use and extend dashboard framework.
 
 It's inspired by http://dashing.io/
-Notable differences are that Dasz is written in JavaScript only. It runs on Node.js and React framework.
+Notable differences are that Dasz is written in JavaScript only. It runs on Node.js and uses React.
 
 ## Creating your own widget
 
@@ -15,7 +15,18 @@ Widget should consists of 3 files:
 * widget.jsx - definition of client-side logic
 * worker.js - for server-side logic
 
-Dasz provides a efficent, one way communication between `worker.js` and `widget.jsx`
+Dasz provides an efficent, one way communication between `worker.js` and `widget.jsx`
+
+### Widget from npm package
+
+Instead of putting widget instide `widgets` directory, widgets can be installed from npm. For example
+
+    npm i dasz-widget-ping
+
+Will install the `ping` widget. When creating npm package, the outcome file `widget.jsx` should be pased using babel
+with presets `es2015` and `react`. All output files (especially `worker.js` and `widget.jsx`) should be placed inside `dist`
+directory of the package. For more details, please see the build script of the `ping` widget, available here:
+https://github.com/dotintegral/dasz-widget-ping
 
 ### Creating worker file
 
